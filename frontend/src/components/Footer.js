@@ -18,10 +18,10 @@ const Footer = () => {
                             Votre destination pour l'artisanat local de qualité au Burkina Faso.
                         </p>
                         <div className="flex space-x-4">
-                            <a href="#" className="social-icon text-white hover:text-primary"><i className="fab fa-facebook-f"></i></a>
-                            <a href="#" className="social-icon text-white hover:text-primary"><i className="fab fa-instagram"></i></a>
-                            <a href="#" className="social-icon text-white hover:text-primary"><i className="fab fa-twitter"></i></a>
-                            <a href="#" className="social-icon text-white hover:text-primary"><i className="fab fa-whatsapp"></i></a>
+                            <button className="social-icon text-white hover:text-primary"><i className="fab fa-facebook-f"></i></button>
+                            <button className="social-icon text-white hover:text-primary"><i className="fab fa-instagram"></i></button>
+                            <button className="social-icon text-white hover:text-primary"><i className="fab fa-twitter"></i></button>
+                            <button className="social-icon text-white hover:text-primary"><i className="fab fa-whatsapp"></i></button>
                         </div>
                     </div>
 
@@ -46,11 +46,11 @@ const Footer = () => {
                     <div>
                         <h3 className="text-xl font-bold mb-4">Liens rapides</h3>
                         <ul className="space-y-2">
-                            <li><a href="#" className="hover:text-primary transition">À propos de nous</a></li>
-                            <li><a href="#" className="hover:text-primary transition">Nos produits</a></li>
-                            <li><a href="#" className="hover:text-primary transition">Promotions</a></li>
-                            <li><a href="#" className="hover:text-primary transition">Livraison</a></li>
-                            <li><a href="#" className="hover:text-primary transition">Contact</a></li>
+                            <li><button className="hover:text-primary transition">À propos de nous</button></li>
+                            <li><button className="hover:text-primary transition">Nos produits</button></li>
+                            <li><button className="hover:text-primary transition">Promotions</button></li>
+                            <li><button className="hover:text-primary transition">Livraison</button></li>
+                            <li><button className="hover:text-primary transition">Contact</button></li>
                         </ul>
                     </div>
 

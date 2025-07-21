@@ -25,7 +25,7 @@ const Header = () => {
                         <nav className="hidden md:block">
                             <ul className="flex space-x-8">
                                 <li>
-                                    <a href="#" className="text-secondary hover:text-primary font-medium">Accueil</a>
+                                    <button className="text-secondary hover:text-primary font-medium">Accueil</button>
                                 </li>
                                 <li>
                                     <a href="#products" className="text-secondary hover:text-primary font-medium">Produits</a>

@@ -73,9 +73,9 @@ const Promotions = () => {
                     <h2 className="text-3xl font-bold text-secondary">
                         Produits en Promotion
                     </h2>
-                    <a href="#" className="text-primary font-semibold hover:underline">
+                    <button className="text-primary font-semibold hover:underline">
                         Voir tout →
-                    </a>
+                    </button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {dummyPromotions.map((promotion) => (
