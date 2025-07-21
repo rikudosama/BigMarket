@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Burkina Market - Boutique en ligne moderne</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#F0A500",
+              secondary: "#334E58",
+              accent: "#CE1126",
+              dark: "#1A1A1A",
+              light: "#F8F9FA",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      body {
+        font-family: "Poppins", sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      .product-card {
+        transition: all 0.3s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .cart-panel {
+        transition: transform 0.4s ease;
+      }
+
+      .cart-open {
+        transform: translateX(0);
+      }
+
+      .cart-closed {
+        transform: translateX(100%);
+      }
+
+      .hero-bg {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url("https://images.unsplash.com/photo-1523805009345-7448845a9e53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1772&q=80");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .price-calculator {
+        transition: max-height 0.4s ease;
+      }
+
+      .checkout-form input:focus,
+      .checkout-form select:focus {
+        outline: none;
+        border-color: #f0a500;
+      }
+
+      .social-icon {
+        transition: transform 0.3s ease;
+      }
+
+      .social-icon:hover {
+        transform: translateY(-3px);
+      }
+
+      .payment-method input:checked ~ div {
+        color: #f0a500;
+      }
+
+      .payment-method input:checked {
+        accent-color: #f0a500;
+      }
+
+      .payment-method input:checked + div .font-medium {
+        color: #f0a500;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <div
+              class="bg-primary w-10 h-10 rounded-full flex items-center justify-center mr-3"
+            >
+              <span class="text-white font-bold text-xl">BM</span>
+            </div>
+            <h1 class="text-2xl font-bold text-secondary">
+              Burkina<span class="text-primary">Market</span>
+            </h1>
+          </div>
+
+          <nav class="hidden md:block">
+            <ul class="flex space-x-8">
+              <li>
+                <a
+                  href="#"
+                  class="text-secondary hover:text-primary font-medium"
+                  >Accueil</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#products"
+                  class="text-secondary hover:text-primary font-medium"
+                  >Produits</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#promotions"
+                  class="text-secondary hover:text-primary font-medium"
+                  >Promotions</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#calculator"
+                  class="text-secondary hover:text-primary font-medium"
+                  >Calculateur</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-secondary hover:text-primary font-medium"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <div class="flex items-center space-x-4">
+            <button id="cartButton" class="relative">
+              <i class="fas fa-shopping-cart text-secondary text-xl"></i>
+              <span
+                id="cartCount"
+                class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                >0</span
+              >
+            </button>
+            <button class="md:hidden">
+              <i class="fas fa-bars text-secondary text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-24 text-white">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Artisanat Local de Qualité
+        </h1>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">
+          Découvrez les meilleurs produits artisanaux du Burkina Faso, fabriqués
+          avec passion et savoir-faire traditionnel.
+        </p>
+        <div class="flex justify-center space-x-4">
+          <a
+            href="#products"
+            class="bg-primary hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition duration-300"
+            >Explorer</a
+          >
+          <a
+            href="#promotions"
+            class="bg-white hover:bg-gray-100 text-secondary font-bold py-3 px-8 rounded-full transition duration-300"
+            >Promotions</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-secondary mb-12">
+          Nos Produits Populaires
+        </h2>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+        >
+          <!-- Product 1 -->
+          <div
+            class="product-card bg-white rounded-xl overflow-hidden shadow-lg"
+          >
+            <div class="relative">
+              <img
+                src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                alt="Tissu traditionnel"
+                class="w-full h-60 object-cover"
+              />
+              <div
+                class="absolute top-4 right-4 bg-accent text-white text-sm font-bold px-3 py-1 rounded-full"
+              >
+                Nouveau
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Tissu Faso Dan Fani
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Tissu traditionnel tissé à la main
+              </p>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xl font-bold text-primary">12,500 FCFA</span>
+                <span class="text-gray-500 line-through">15,000 FCFA</span>
+              </div>
+              <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Taille:</label>
+                <div class="flex space-x-2">
+                  <button
+                    class="border border-gray-300 px-3 py-1 rounded hover:bg-primary hover:text-white"
+                  >
+                    S
+                  </button>
+                  <button
+                    class="border border-gray-300 px-3 py-1 rounded bg-primary text-white"
+                  >
+                    M
+                  </button>
+                  <button
+                    class="border border-gray-300 px-3 py-1 rounded hover:bg-primary hover:text-white"
+                  >
+                    L
+                  </button>
+                </div>
+              </div>
+              <button
+                class="add-to-cart w-full bg-secondary hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                data-id="1"
+                data-name="Tissu Faso Dan Fani"
+                data-price="12500"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div
+            class="product-card bg-white rounded-xl overflow-hidden shadow-lg"
+          >
+            <div class="relative">
+              <img
+                src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                alt="Bijoux artisanaux"
+                class="w-full h-60 object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Collier en Bronze
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Bijou artisanal fabriqué à la main
+              </p>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xl font-bold text-primary">8,900 FCFA</span>
+              </div>
+              <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Couleur:</label>
+                <div class="flex space-x-2">
+                  <button
+                    class="border border-gray-300 px-3 py-1 rounded hover:bg-primary hover:text-white"
+                  >
+                    Or
+                  </button>
+                  <button
+                    class="border border-gray-300 px-3 py-1 rounded bg-primary text-white"
+                  >
+                    Bronze
+                  </button>
+                  <button
+                    class="border border-gray-300 px-3 py-1 rounded hover:bg-primary hover:text-white"
+                  >
+                    Argent
+                  </button>
+                </div>
+              </div>
+              <button
+                class="add-to-cart w-full bg-secondary hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                data-id="2"
+                data-name="Collier en Bronze"
+                data-price="8900"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div
+            class="product-card bg-white rounded-xl overflow-hidden shadow-lg"
+          >
+            <div class="relative">
+              <img
+                src="https://images.unsplash.com/photo-1566150902887-9679ecc155ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                alt="Sac en cuir"
+                class="w-full h-60 object-cover"
+              />
+              <div
+                class="absolute top-4 right-4 bg-accent text-white text-sm font-bold px-3 py-1 rounded-full"
+              >
+                -20%
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Sac en Cuir Traditionnel
+              </h3>
+              <p class="text-gray-600 mb-4">Sac fabriqué avec du cuir local</p>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xl font-bold text-primary">15,000 FCFA</span>
+                <span class="text-gray-500 line-through">18,750 FCFA</span>
+              </div>
+              <div class="mb-4">
+                <label class="block text-gray-700 mb-2"
+                  >Personnalisation:</label
+                >
+                <select
+                  class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary"
+                >
+                  <option>Aucune</option>
+                  <option>Initiales (+2000 FCFA)</option>
+                  <option>Motif spécial (+3500 FCFA)</option>
+                </select>
+              </div>
+              <button
+                class="add-to-cart w-full bg-secondary hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                data-id="3"
+                data-name="Sac en Cuir Traditionnel"
+                data-price="15000"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div
+            class="product-card bg-white rounded-xl overflow-hidden shadow-lg"
+          >
+            <div class="relative">
+              <img
+                src="https://images.unsplash.com/photo-1600857062241-98c0a6e1ee0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                alt="Statue en bois"
+                class="w-full h-60 object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-secondary mb-2">
+                Statue Mossi
+              </h3>
+              <p class="text-gray-600 mb-4">Sculpture en bois d'ébène</p>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xl font-bold text-primary">22,500 FCFA</span>
+              </div>
+              <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Taille:</label>
+                <div class="flex space-x-2">
+                  <button
+                    class="border border-gray-300 px-3 py-1 rounded hover:bg-primary hover:text-white"
+                  >
+                    20cm
+                  </button>
+                  <button
+                    class="border border-gray-300 px-3 py-1 rounded bg-primary text-white"
+                  >
+                    30cm
+                  </button>
+                  <button
+                    class="border border-gray-300 px-3 py-1 rounded hover:bg-primary hover:text-white"
+                  >
+                    40cm
+                  </button>
+                </div>
+              </div>
+              <button
+                class="add-to-cart w-full bg-secondary hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                data-id="4"
+                data-name="Statue Mossi"
+                data-price="22500"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section id="promotions" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center mb-12">
+          <h2 class="text-3xl font-bold text-secondary">
+            Produits en Promotion
+          </h2>
+          <a href="#" class="text-primary font-semibold hover:underline"
+            >Voir tout →</a
+          >
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Promotion 1 -->
+          <div
+            class="product-card bg-white rounded-xl overflow-hidden shadow-lg flex"
+          >
+            <div class="w-1/3">
+              <img
+                src="https://images.unsplash.com/photo-1560769629-975ec94e541a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
+                alt="Sandales"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="w-2/3 p-6">
+              <div class="flex justify-between">
+                <h3 class="text-xl font-bold text-secondary mb-2">
+                  Sandales en Cuir
+                </h3>
+                <div
+                  class="bg-accent text-white text-sm font-bold px-3 py-1 rounded-full"
+                >
+                  -30%
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">
+                Sandales confortables faites main
+              </p>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xl font-bold text-primary">6,300 FCFA</span>
+                <span class="text-gray-500 line-through">9,000 FCFA</span>
+              </div>
+              <button
+                class="add-to-cart w-full bg-secondary hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                data-id="5"
+                data-name="Sandales en Cuir"
+                data-price="6300"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+
+          <!-- Promotion 2 -->
+          <div
+            class="product-card bg-white rounded-xl overflow-hidden shadow-lg flex"
+          >
+            <div class="w-1/3">
+              <img
+                src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+                alt="Panier"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="w-2/3 p-6">
+              <div class="flex justify-between">
+                <h3 class="text-xl font-bold text-secondary mb-2">
+                  Panier Tressé
+                </h3>
+                <div
+                  class="bg-accent text-white text-sm font-bold px-3 py-1 rounded-full"
+                >
+                  -25%
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">
+                Panier traditionnel en fibres naturelles
+              </p>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xl font-bold text-primary">4,500 FCFA</span>
+                <span class="text-gray-500 line-through">6,000 FCFA</span>
+              </div>
+              <button
+                class="add-to-cart w-full bg-secondary hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                data-id="6"
+                data-name="Panier Tressé"
+                data-price="4500"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+
+          <!-- Promotion 3 -->
+          <div
+            class="product-card bg-white rounded-xl overflow-hidden shadow-lg flex"
+          >
+            <div class="w-1/3">
+              <img
+                src="https://images.unsplash.com/photo-1589985270826-4b7bb1352109?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                alt="Bols"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="w-2/3 p-6">
+              <div class="flex justify-between">
+                <h3 class="text-xl font-bold text-secondary mb-2">
+                  Bol en Terre Cuite
+                </h3>
+                <div
+                  class="bg-accent text-white text-sm font-bold px-3 py-1 rounded-full"
+                >
+                  -15%
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">Bol artisanal pour la cuisine</p>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xl font-bold text-primary">3,400 FCFA</span>
+                <span class="text-gray-500 line-through">4,000 FCFA</span>
+              </div>
+              <button
+                class="add-to-cart w-full bg-secondary hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+                data-id="7"
+                data-name="Bol en Terre Cuite"
+                data-price="3400"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cart Panel -->
+    <div
+      id="cartPanel"
+      class="cart-panel fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-2xl z-50 overflow-y-auto cart-closed"
+    >
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-2xl font-bold text-secondary">Votre Panier</h2>
+          <button id="closeCart" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+
+        <div id="cartItems" class="mb-8">
+          <!-- Cart items will be added here dynamically -->
+          <p id="emptyCartMessage" class="text-gray-500 text-center py-8">
+            Votre panier est vide
+          </p>
+        </div>
+
+        <div class="border-t border-gray-200 pt-4 mb-6">
+          <div class="flex justify-between mb-2">
+            <span class="text-gray-600">Sous-total:</span>
+            <span id="cartSubtotal" class="font-bold">0 FCFA</span>
+          </div>
+          <div class="flex justify-between mb-2">
+            <span class="text-gray-600">Livraison:</span>
+            <span id="shippingCost" class="font-bold">1,500 FCFA</span>
+          </div>
+          <div class="flex justify-between mb-4">
+            <span class="text-gray-600">Réduction:</span>
+            <span id="discount" class="font-bold text-green-600">0 FCFA</span>
+          </div>
+          <div class="flex justify-between text-xl font-bold">
+            <span>Total:</span>
+            <span id="cartTotal">0 FCFA</span>
+          </div>
+        </div>
+
+        <button
+          id="checkoutBtn"
+          class="w-full bg-primary hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-full transition duration-300 mb-4"
+        >
+          Passer la commande
+        </button>
+        <button
+          class="w-full border border-secondary text-secondary hover:bg-gray-100 font-bold py-3 px-4 rounded-full transition duration-300"
+        >
+          Continuer vos achats
+        </button>
+      </div>
+    </div>
+
+    <!-- Checkout Form -->
+    <div
+      id="checkoutModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center"
+    >
+      <div
+        class="bg-white rounded-xl w-11/12 md:w-2/3 lg:w-1/2 max-h-screen overflow-y-auto"
+      >
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-secondary">
+              Finaliser votre commande
+            </h2>
+            <button
+              id="closeCheckout"
+              class="text-gray-500 hover:text-gray-700"
+            >
+              <i class="fas fa-times text-xl"></i>
+            </button>
+          </div>
+
+          <form class="checkout-form grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="md:col-span-2">
+              <h3 class="text-xl font-semibold text-secondary mb-4">
+                Informations personnelles
+              </h3>
+            </div>
+
+            <div>
+              <label class="block text-gray-700 mb-2">Nom complet</label>
+              <input
+                type="text"
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary"
+                required
+              />
+            </div>
+
+            <div>
+              <label class="block text-gray-700 mb-2">Email</label>
+              <input
+                type="email"
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary"
+                required
+              />
+            </div>
+
+            <div>
+              <label class="block text-gray-700 mb-2">Téléphone</label>
+              <input
+                type="tel"
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary"
+                required
+              />
+            </div>
+
+            <div>
+              <label class="block text-gray-700 mb-2">Ville</label>
+              <select
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary"
+                required
+              >
+                <option value="">Sélectionnez votre ville</option>
+                <option value="ouagadougou">Ouagadougou</option>
+                <option value="bobo">Bobo-Dioulasso</option>
+                <option value="koudougou">Koudougou</option>
+                <option value="ouahigouya">Ouahigouya</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-2">
+              <h3 class="text-xl font-semibold text-secondary mb-4 mt-6">
+                Adresse de livraison
+              </h3>
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block text-gray-700 mb-2">Adresse</label>
+              <input
+                type="text"
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary"
+                required
+              />
+            </div>
+
+            <div class="md:col-span-2">
+              <h3 class="text-xl font-semibold text-secondary mb-4 mt-6">
+                Méthode de paiement
+              </h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label
+                  class="payment-method flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-primary hover:bg-gray-50"
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="orange"
+                    class="mr-3"
+                    required
+                  />
+                  <div>
+                    <div class="font-medium text-secondary">Orange Money</div>
+                    <div class="text-sm text-gray-500">
+                      Paiement mobile instantané
+                    </div>
+                  </div>
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Orange_Money_logo.svg/1200px-Orange_Money_logo.svg.png"
+                    alt="Orange Money"
+                    class="ml-auto h-8"
+                  />
+                </label>
+
+                <label
+                  class="payment-method flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-primary hover:bg-gray-50"
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="moov"
+                    class="mr-3"
+                  />
+                  <div>
+                    <div class="font-medium text-secondary">Moov Money</div>
+                    <div class="text-sm text-gray-500">
+                      Paiement mobile instantané
+                    </div>
+                  </div>
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Moov_Africa_2019_logo.svg/1200px-Moov_Africa_2019_logo.svg.png"
+                    alt="Moov Money"
+                    class="ml-auto h-8"
+                  />
+                </label>
+
+                <label
+                  class="payment-method flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-primary hover:bg-gray-50"
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="telecel"
+                    class="mr-3"
+                  />
+                  <div>
+                    <div class="font-medium text-secondary">Telecel Money</div>
+                    <div class="text-sm text-gray-500">
+                      Paiement mobile instantané
+                    </div>
+                  </div>
+                  <img
+                    src="https://telecel.bf/wp-content/uploads/2023/03/telecel-money-logo.png"
+                    alt="Telecel Money"
+                    class="ml-auto h-8"
+                  />
+                </label>
+
+                <label
+                  class="payment-method flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-primary hover:bg-gray-50"
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="paypal"
+                    class="mr-3"
+                  />
+                  <div>
+                    <div class="font-medium text-secondary">PayPal</div>
+                    <div class="text-sm text-gray-500">
+                      Paiement par carte internationale
+                    </div>
+                  </div>
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1200px-PayPal.svg.png"
+                    alt="PayPal"
+                    class="ml-auto h-8"
+                  />
+                </label>
+
+                <label
+                  class="payment-method flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-primary hover:bg-gray-50"
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="cash"
+                    class="mr-3"
+                  />
+                  <div>
+                    <div class="font-medium text-secondary">
+                      Paiement à la livraison
+                    </div>
+                    <div class="text-sm text-gray-500">
+                      Espèces ou mobile money
+                    </div>
+                  </div>
+                  <i
+                    class="fas fa-money-bill-wave ml-auto text-2xl text-green-500"
+                  ></i>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-gray-700 mb-2">Commentaires</label>
+              <textarea
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="md:col-span-2 mt-6">
+              <button
+                type="submit"
+                class="w-full bg-primary hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-full transition duration-300"
+              >
+                Confirmer la commande
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-secondary text-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          <div>
+            <div class="flex items-center mb-4">
+              <div
+                class="bg-primary w-10 h-10 rounded-full flex items-center justify-center mr-3"
+              >
+                <span class="text-white font-bold text-xl">BM</span>
+              </div>
+              <h2 class="text-2xl font-bold">
+                Burkina<span class="text-primary">Market</span>
+              </h2>
+            </div>
+            <p class="mb-4">
+              Votre destination pour l'artisanat local de qualité au Burkina
+              Faso.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="social-icon text-white hover:text-primary"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="social-icon text-white hover:text-primary"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="social-icon text-white hover:text-primary"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="social-icon text-white hover:text-primary"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold mb-4">Horaires d'ouverture</h3>
+            <ul class="space-y-2">
+              <li class="flex justify-between">
+                <span>Lundi - Vendredi:</span>
+                <span>8h - 18h</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Samedi:</span>
+                <span>9h - 16h</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Dimanche:</span>
+                <span>10h - 14h</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold mb-4">Liens rapides</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="hover:text-primary transition"
+                  >À propos de nous</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition"
+                  >Nos produits</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition">Promotions</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition">Livraison</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-primary transition">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold mb-4">Contact</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fas fa-map-marker-alt mt-1 mr-3 text-primary"></i>
+                <span>Av. de la Nation, Ouagadougou, Burkina Faso</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone-alt mr-3 text-primary"></i>
+                <span>+226 25 40 12 34</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-envelope mr-3 text-primary"></i>
+                <span>contact@burkinamarket.bf</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+          <p>&copy; 2023 BurkinaMarket. Tous droits réservés.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Cart functionality
+      let cart = [];
+      const cartButton = document.getElementById("cartButton");
+      const cartPanel = document.getElementById("cartPanel");
+      const closeCart = document.getElementById("closeCart");
+      const cartItems = document.getElementById("cartItems");
+      const cartCount = document.getElementById("cartCount");
+      const cartSubtotal = document.getElementById("cartSubtotal");
+      const cartTotal = document.getElementById("cartTotal");
+      const checkoutBtn = document.getElementById("checkoutBtn");
+      const checkoutModal = document.getElementById("checkoutModal");
+      const closeCheckout = document.getElementById("closeCheckout");
+      const emptyCartMessage = document.getElementById("emptyCartMessage");
+      const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+      // Toggle cart panel
+      cartButton.addEventListener("click", () => {
+        cartPanel.classList.remove("cart-closed");
+        cartPanel.classList.add("cart-open");
+      });
+
+      closeCart.addEventListener("click", () => {
+        cartPanel.classList.remove("cart-open");
+        cartPanel.classList.add("cart-closed");
+      });
+
+      // Close checkout modal
+      closeCheckout.addEventListener("click", () => {
+        checkoutModal.classList.add("hidden");
+      });
+
+      // Add to cart functionality
+      addToCartButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const id = button.getAttribute("data-id");
+          const name = button.getAttribute("data-name");
+          const price = parseInt(button.getAttribute("data-price"));
+
+          // Check if product is already in cart
+          const existingItem = cart.find((item) => item.id === id);
+
+          if (existingItem) {
+            existingItem.quantity += 1;
+          } else {
+            cart.push({
+              id,
+              name,
+              price,
+              quantity: 1,
+            });
+          }
+
+          updateCart();
+
+          // Show cart panel
+          cartPanel.classList.remove("cart-closed");
+          cartPanel.classList.add("cart-open");
+
+          // Show success message
+          alert(`${name} a été ajouté à votre panier!`);
+        });
+      });
+
+      // Update cart display
+      function updateCart() {
+        // Update cart count
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
+
+        // Update cart items
+        cartItems.innerHTML = "";
+
+        if (cart.length === 0) {
+          emptyCartMessage.classList.remove("hidden");
+          checkoutBtn.disabled = true;
+        } else {
+          emptyCartMessage.classList.add("hidden");
+          checkoutBtn.disabled = false;
+
+          cart.forEach((item) => {
+            const cartItemElement = document.createElement("div");
+            cartItemElement.className =
+              "flex items-center py-4 border-b border-gray-200";
+            cartItemElement.innerHTML = `
+                        <div class="flex-1">
+                            <h4 class="font-bold text-secondary">${
+                              item.name
+                            }</h4>
+                            <div class="flex items-center mt-2">
+                                <button class="decrease-quantity w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center" data-id="${
+                                  item.id
+                                }">-</button>
+                                <span class="quantity mx-2">${
+                                  item.quantity
+                                }</span>
+                                <button class="increase-quantity w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center" data-id="${
+                                  item.id
+                                }">+</button>
+                            </div>
+                        </div>
+                        <div class="ml-4 text-right">
+                            <span class="block font-bold">${(
+                              item.price * item.quantity
+                            ).toLocaleString()} FCFA</span>
+                            <button class="remove-item mt-2 text-red-500 hover:text-red-700" data-id="${
+                              item.id
+                            }">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+            cartItems.appendChild(cartItemElement);
+          });
+
+          // Add event listeners to quantity buttons
+          document.querySelectorAll(".decrease-quantity").forEach((button) => {
+            button.addEventListener("click", () => {
+              const id = button.getAttribute("data-id");
+              const item = cart.find((item) => item.id === id);
+              if (item.quantity > 1) {
+                item.quantity -= 1;
+                updateCart();
+              }
+            });
+          });
+
+          document.querySelectorAll(".increase-quantity").forEach((button) => {
+            button.addEventListener("click", () => {
+              const id = button.getAttribute("data-id");
+              const item = cart.find((item) => item.id === id);
+              item.quantity += 1;
+              updateCart();
+            });
+          });
+
+          document.querySelectorAll(".remove-item").forEach((button) => {
+            button.addEventListener("click", () => {
+              const id = button.getAttribute("data-id");
+              cart = cart.filter((item) => item.id !== id);
+              updateCart();
+            });
+          });
+        }
+
+        // Update cart totals
+        const subtotal = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
+        cartSubtotal.textContent = subtotal.toLocaleString() + " FCFA";
+
+        const shipping = 1500;
+        const discount = 0;
+        const total = subtotal + shipping - discount;
+
+        cartTotal.textContent = total.toLocaleString() + " FCFA";
+      }
+
+      // Checkout button
+      checkoutBtn.addEventListener("click", () => {
+        checkoutModal.classList.remove("hidden");
+      });
+
+      // Initialize cart
+      updateCart();
+    </script>
+  </body>
+</html>
